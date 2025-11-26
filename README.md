@@ -9,7 +9,6 @@
 - 图片生成 - Stable Diffusion 集成
 - 支持图片和docx文件上传
 - 支持开启访问密码，聊天记录本地存储
-- 轻量化 - ~646 KB gzip
 - 无服务器 - Serverless 部署，零运维
 - 支持多个 AI 服务提供商，并可自行添加：
     - OpenAI (ChatGPT)
@@ -28,9 +27,15 @@
 https://dash.deno.com
 
 - Fork 本仓库
-- Build Step改为`NITRO_PRESET=deno-deploy npm run build_node`
-- Deploy Project
-- 按下表设置环境变量
+- Git Integration 处选择本仓库
+- Project Configuration
+    - Install Step : `npm install`
+    - Build Step : `NITRO_PRESET=deno-deploy npm run build_node`
+    - Root directory : `.output`
+    - Production Branch : `main`
+    - Entrypoint : `server/index.ts`    
+    - Deploy Project
+- Environment Variables 按下表设置环境变量
 - `./utils/db.ts`中设置了BASE_URL的，环境变量中可以不用填写。
 
 ### 环境变量列表
