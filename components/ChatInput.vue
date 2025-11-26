@@ -8,10 +8,24 @@ const fileList = ref<{
   url: string
 }[]>([])
 const {openModelSelect} = useGlobalState()
+const {t} = useI18n()
+
+// 响应式 placeholder
+const isMobile = ref(false)
+const placeholder = computed(() => {
+  const baseText = t('please_input_text') + '...'
+  return isMobile.value ? baseText : `${baseText} (${t('shift_enter_hint')})`
+})
 
 onMounted(() => {
   addHistory.value = localStorage.getItem('addHistory') === 'true'
+  // 检测是否为移动设备
+  isMobile.value = window.innerWidth < 768
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth < 768
+  })
 })
+
 watch(addHistory, () => {
   localStorage.setItem('addHistory', addHistory.value.toString())
 })
@@ -135,7 +149,7 @@ const handlePaste = (e: ClipboardEvent) => {
           <UIcon name="i-heroicons-paper-clip-16-solid" class="w-6 h-6"/>
         </UButton>
       </div>
-      <UTextarea v-model="input" :placeholder="$t('please_input_text') + '...' "
+      <UTextarea v-model="input" :placeholder="placeholder"
                  @keydown.prevent.enter="handleInput($event)"
                  @paste="handlePaste"
                  autofocus :rows="2" autoresize color="gray"
