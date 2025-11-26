@@ -1,0 +1,44 @@
+--- a/pages/index.vue
++++ b/pages/index.vue
+@@ -169,12 +169,33 @@ async function handleSend(input: string, addHistory: boolean, files: {
+   }
+   switch (selectedModel.value.provider) {
+     case 'openai':
+-      openAIReq({
+-        ...req,
+-        endpoint: selectedModel.value.endpoint!,
+-        key: settings.value.openaiKey === '' ? undefined : settings.value.openaiKey
+-      }, text => {
+-        history.value[history.value.length - 1].content += text
+-        scrollStream(chatList)
+-      }).then(basicDone).catch(basicCatch).finally(basicFin)
++      // Check if there are docx files
++      const docxFiles = files.filter(f => f.file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
++      
++      if (docxFiles.length > 0) {
++        // Use FormData if there are docx files
++        const form = new FormData()
++        form.append('model', req.model)
++        form.append('messages', JSON.stringify(req.messages))
++        form.append('endpoint', selectedModel.value.endpoint!)
++        if (settings.value.openaiKey !== '') {
++          form.append('key', settings.value.openaiKey)
++        }
++        docxFiles.forEach(f => form.append('files', f.file))
++        
++        streamFetchWithFile('/openai', form, text => {
++          history.value[history.value.length - 1].content += text
++          scrollStream(chatList)
++        }).then(basicDone).catch(basicCatch).finally(basicFin)
++      } else {
++        // Use JSON for backward compatibility
++        openAIReq({
++          ...req,
++          endpoint: selectedModel.value.endpoint!,
++          key: settings.value.openaiKey === '' ? undefined : settings.value.openaiKey
++        }, text => {
++          history.value[history.value.length - 1].content += text
++          scrollStream(chatList)
++        }).then(basicDone).catch(basicCatch).finally(basicFin)
++      }
+       break

@@ -1,0 +1,163 @@
+html,
+body,
+#__nuxt {
+    @apply h-full font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+}
+
+::selection {
+    @apply bg-slate-400/25 text-slate-900 dark:text-slate-100;
+}
+
+/* Premium Gradient Background */
+.bg-chat-pattern {
+    background-image:
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(34, 211, 238, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+.dark .bg-chat-pattern {
+    background-image:
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(34, 211, 238, 0.08) 0px, transparent 50%);
+}
+
+/* Chat container widths */
+.container-chat {
+    max-width: 740px;
+}
+
+.container-chat-wide {
+    max-width: 960px;
+}
+
+/* Bubble styles */
+.bubble-user {
+    @apply bg-slate-500/5 dark:bg-slate-400/5 text-neutral-900 dark:text-neutral-100;
+    border-radius: 20px 20px 4px 20px;
+}
+
+.bubble-assistant {
+    @apply bg-slate-500/5 dark:bg-slate-400/5;
+    border-radius: 20px 20px 20px 4px;
+}
+
+/* Button Feedback */
+.btn-scale {
+    @apply transition-transform duration-100 active:scale-95;
+}
+
+/* Header glass */
+.header-glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .header-glass {
+    background: rgba(23, 23, 23, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Input area glass */
+.input-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.dark .input-glass {
+    background: rgba(23, 23, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar hidden cross browser */
+.scrollbar-hide::-webkit-scrollbar {
+    @apply hidden;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Loading dots for streaming */
+.loading-stream:after {
+    content: ' …';
+    animation: blink 1.2s steps(1, end) infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0
+    }
+
+    50% {
+        opacity: 1
+    }
+}
+
+/* Force remove any default ring/outline inside input card */
+.no-focus-ring :is(textarea, input) {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+.no-focus-ring :is(textarea, input):focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+body {
+    @apply bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300;
+}
+
+.blur-global {
+    background: rgba(245, 245, 247, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Override Nuxt UI UTextarea background with data attributes */
+.u-textarea[data-color] {
+    @apply bg-transparent !important;
+}
+
+/* Override all UTextarea and textarea elements */
+.u-textarea,
+textarea {
+    background-color: transparent !important;
+}
+
+.loading>dd:last-child::after,
+.loading>dl:last-child::after,
+.loading>dt:last-child::after,
+.loading>h1:last-child::after,
+.loading>h2:last-child::after,
+.loading>h3:last-child::after,
+.loading>h4:last-child::after,
+.loading>h5:last-child::after,
+.loading>h6:last-child::after,
+.loading>li:last-child::after,
+.loading>ol:last-child li:last-child::after,
+.loading>p:last-child::after,
+.loading>pre:last-child code::after,
+.loading>td:last-child::after,
+.loading>ul:last-child li:last-child::after {
+    content: ' ● ';
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    @apply hidden
+}
