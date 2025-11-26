@@ -55,6 +55,13 @@ export default defineNuxtConfig({
         strategy: 'no_prefix',
         defaultLocale: 'zh',
     },
+    sourcemap: {
+      server: false // 强烈建议关闭服务端的 source map
+      // client: false  // 如果依然内存不足，也可以关闭客户端的
+    },
+    nitro: {
+      sourceMap: false // 确保 Nitro 也不生成
+    },
 
     compatibilityDate: '2025-11-24'
 })
