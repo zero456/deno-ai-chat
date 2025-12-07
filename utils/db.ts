@@ -123,7 +123,7 @@ export const uniModals: Model[] = [
         endpoint: 'chat/completions'
     },
     {
-        id: 'mistral-large-2411',
+        id: 'mistral-large-2512',
         name: 'Mistral Large',
         provider: 'openai',
         type: 'universal',
